@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="./Untitled-1.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./js/jquery-3.5.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>  
+    <script src="js/popper.min.js"></script>  
+    <link rel="icon" href="ccc.jpg"> 
+    <title>HOME | CCC E-Commerce </title>
+</head>
+<body>
+    </head>
+    <body>
+       <div class="carousel-container">
+        <div class="carousel">
+          <img src="dci3.jpg" alt="Image 1">
+          <img src="das1.jpg" alt="Image 2">
+          <img src="ssc1.jpg" alt="Image 3">
+          <img src="ssc2.jpg" alt="Image 4">
+          <img src="ssc3.jpg" alt="Image 4">
+        </div>
+      </div>
+          <div id="container-img">
+          <div id="carousel-img">
+          <div id="small-images">
+          <div class="small-image">
+              <img src="dcilogo.png" alt="Small Image 1">
+          </div>
+          <div class="small-image">
+              <img src="dtelogo.png" alt="Small Image 2">
+          </div>
+          <div class="small-image">
+              <img src="dbalogo.png" alt="Small Image 3">
+          </div>
+          <div class="small-image">
+              <img src="daslogo.png" alt="Small Image 4">
+          </div>
+          <div class="small-image">
+              <img src="ssclogo.png" alt="Small Image 5">
+          </div> 
+        </div>
+       </div>
+
+      <!-- <div id="small-images">
+        <div class="small-image">
+            <img src="dcilogo.png" alt="Small Image 1">
+            <a href="./DEPT/DCI.html" class="click-button">Shop Now!</a>
+        </div>
+        <div class="small-image">
+            <img src="dtelogo.png" alt="Small Image 2">
+            <a href="./DEPT/dte.html" class="click-button">Shop Now!</a>
+        </div>
+        <div class="small-image">
+            <img src="dbalogo.png" alt="Small Image 3">
+            <a href="./DEPT/dba.html" class="click-button">Shop Now!</a>
+        </div>
+        <div class="small-image">
+            <img src="daslogo.png" alt="Small Image 4">
+            <a href="./DEPT/das.html" class="click-button">Shop Now!</a>
+        </div>
+        <div class="small-image">
+            <img src="ssclogo.png" alt="Small Image 5">
+            <a href="./DEPT/ssc.html" class="click-button">Shop Now!</a>
+        </div> -->
+    </div> 
+      
+      <button class="carousel-button left" onclick="prevImage()">&#9664;</button>
+      <button class="carousel-button right" onclick="nextImage()">&#9654;</button>
+      
+    
+      <script>
+        const carousel = document.querySelector('.carousel');
+        let currentIndex = 0;
+        let startX = 0;
+        let currentTranslate = 0;
+        let isDragging = false;
+        let isPlaying = true;
+      
+        function prevImage() {
+          currentIndex = (currentIndex - 1 + carousel.children.length) % carousel.children.length;
+          updateCarousel();
+        }
+      
+        function nextImage() {
+          currentIndex = (currentIndex + 1) % carousel.children.length;
+          updateCarousel();
+        }
+      
+        function updateCarousel() {
+          const translateX = -currentIndex * 50 + "%";
+          carousel.style.transform = `translateX(${translateX})`;
+        }
+      
+        function playCarousel() {
+          if (isPlaying) {
+            nextImage();
+          }
+        }
+      
+        
+        function toggleAutoPlay() {
+          isPlaying = !isPlaying;
+        }
+      
+        
+        const autoPlayInterval = setInterval(playCarousel, 3000); // Change slide every 3 seconds
+      
+        carousel.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          startX = e.clientX - carousel.getBoundingClientRect().left;
+          currentTranslate = -currentIndex * carousel.offsetWidth;
+      
+          // Clear the auto-play interval when the user interacts with the carousel
+          clearInterval(autoPlayInterval);
+        });
+      
+        carousel.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          const x = e.clientX - carousel.getBoundingClientRect().left;
+          const diff = x - startX;
+          carousel.style.transform = `translateX(${currentTranslate + diff}px)`;
+        });
+      
+        carousel.addEventListener('mouseup', () => {
+          isDragging = false;
+          const threshold = carousel.offsetWidth / 4;
+          if (Math.abs(currentTranslate) + threshold < currentIndex * carousel.offsetWidth) {
+            currentIndex++;
+          } else if (Math.abs(currentTranslate) - threshold > currentIndex * carousel.offsetWidth) {
+            currentIndex--;
+          }
+          updateCarousel();
+      
+          // Restart the auto-play interval after user interaction
+          autoPlayInterval = setInterval(playCarousel, 3000); // Change slide every 3 seconds
+        });
+      
+        carousel.addEventListener('mouseleave', () => {
+          isDragging = false;
+          updateCarousel();
+        });
+      </script>
+      
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="topnav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <!--Photos from DALL-E an AI photo Generation-->
+                <div class="justify-content-md-start">
+                    <a href="https://www.facebook.com/citycollegeofcalamba">
+                        <img class="logo" src="ccc.jpg" height="75">
+                    </a>
+                    <span id="title">CCC E-Commerce</span></a> 
+                </div>
+                <!--Navigation Bat-->
+                <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <a href="DEPT/DCI.html" class="nav-item nav-link active">DCI PRODUCTS</a>
+                        <a href="DEPT/dte.html" class="nav-item nav-link">DTE PRODUCTS</a>
+                        <a href="DEPT/dba.html" class="nav-item nav-link active">DBA PRODUCTS</a>
+                        <a href="DEPT/das.html" class="nav-item nav-link active">DAS PRODUCTS</a>
+                        <a href="DEPT/ssc.html" class="nav-item nav-link active">SSC PRODUCTS</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <footer>
+      <p>&copy; CCC E-Commerce.</p>
+  </footer>
+    
+</body>
+</html>
